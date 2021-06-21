@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+<h1>Cart</h1>
+<div class="box-element">
+    <a class="btn btn-outline-info" href="{% url 'catagory' %}">&#x2190;Continue with Shopping</a>
+
+</div>
+
+{% if cart.products.exists %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element">
+            <table class="table cart-table">
+                <tbody class="cart-body">
+                    {% for item in items %}
+                    <tr class="cart-product">
+                        <td>
+                            <div class="row-cart ">
+                                
+
+                                <div style="flex:2;"><img src="{{ item.product.image.url}}"></span></div>
+                       
+                                <div style="flex:2"><span style="float: left;"><span><strong>{{ item.product.title}}</strong></span></div>
+                                <div style="flex:2"><span style="float: right;">&#x20B9; {{item.product.price}}</span></div>
+                                
+
+                            </div>
+                            <div class="row-cart ">
+                                
+
+                                <div class="flex-item flex1"><span class="btn btn-light" style="margin-top:6%; margin-left:9%" >Qty: {{item.quantity}}</span>
+                                    <span><img data-product={{item.product.id}} data-action="additem" class="chg-quantity update-Qty" src="{% static 'img/plus-solid.svg' %}" style="float: left; margin-top:8%" >
+            
+                                        <img  data-product={{item.product.id}} data-action="removeitem" class="chg-quantity update-Qty" src="{% static 'img/minus-solid.svg' %}" style="float: right;  margin-top:8%; margin-right:4%"></span>
+                                
+                                </div>
+                       
+          
+                                    <!-- <span><img data-product={{item.product.id}} data-action="additem" class="chg-quantity update-Qty" src="{% static 'img/plus-circle-solid.svg' %}" style="float: left;" >
+            
+                                    <img  data-product={{item.product.id}} data-action="removeitem" class="chg-quantity update-Qty" src="{% static 'img/minus-circle-solid.svg' %}" style="float: right;"></span></div> -->
+
+                                <button data-object={{item.product.id}} data-action="remove" class="btn btn-secondary update-cart" style="float: right;"><strong>Remove</strong></button>
+                                
+   
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-lg-6">
+        <div class="box-element product">
+            <div class="ajax-price-update">
+                <div class="row-1">
+                    <div style="flex:2;"><strong>Sub Total:</strong><span class='cart-subtotal' style="float: right;">&#x20B9;{{cart.get_cart_total}}</span></div>
+                    <hr>
+                    <div style="flex:2;"><strong> Shipping:</strong><span style="float: right;">Free</span></div>
+                    <hr>
+                    <div style="flex:2;"><strong>GST:</strong><span style="float: right;">&#x20B9;10</span></div>
+                    <hr>
+
+                </div>
+                <div>
+                    <div  style="flex:2; text-align:center"><h6>Total Payable: <span class='cart-total'>&#x20B9; {{cart.get_final_total}}</span></h6></div>
+                    <a style="font-family:verdana" class="btn btn-warning btn-block" href= '{% url "checkout" %}'>Proceed to Buy ( <span class='navbar-cart-count'>{{ cart.get_cart_item_total }}</span> Items)</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cart-item-remove-form" style="display: none;">
+    {% include 'carts/snippets/remove-product.html' %}
+  
+  </div>
+
+{% else %}
+<p class='lead'>Cart is empty</p>
+{% endif %}
+</div>
+{% endblock %}
