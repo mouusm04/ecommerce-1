@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags %} 
+{% block content %}
+
+<style>
+.product {
+    margin-top: 5%;
+    margin-right: 70%;
+}
+
+</style>
+
+<div class="container" style="margin-left: 40%;">
+
+
+<div class="box-element product">
+    <h1 style="text-align: center;">Create Account</h1>
+    <div class="register-form" style="margin-left: 5%;">
+        <form method="POST"> {% csrf_token %}
+        {{ form|crispy }}
+        <hr>
+        <button type="submit" class="btn btn-warning" style="width: 100%;">Continue</button>
+    </form>
+    
+    
+
+    </div>
+    <hr>
+    <div class="button-login" style="margin-left: 5%;">
+
+        <p><strong>Already have an account? <a  href="{% url 'login_page' %}" role="button"> <u>Login</u></a></strong> </p>
+    
+    </div>
+</div>
+</div>
+
+{% endblock %}
