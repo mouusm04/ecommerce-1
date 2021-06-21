@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{%load crispy_forms_tags %} 
+<div class="container">
+<div class="row">
+    <div class="col-lg-4">
+        <div class="slide-1-description">
+            <img class="thumbnail" src="{{object.imageURL}}" alt="My image">
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <h1>{{object.title}}</h1>
+        <hr>
+        <h3>&#x20B9;{{object.price}}</h3>
+        <p>FREE delivery : <strong>Monday, June 14</strong></p>
+        <hr>
+        <h5>In stock.</h5>
+        
+        <p>Sold by <a href="url">Retail Private Ltd</a> and Fulfilled by <a href="url">Amazon</a>.</p>
+        <div class="container">
+            <div class="popup" onclick="myFunction()"><img style="width: 40%;" src="{% static 'img/pay on delivery.png' %}"><P>COD</P><span class="popuptext" id="myPopup"></span></div>
+            <div class="popup" onclick="myFunction()"><img style="width: 40%;" src="{% static 'img/7_day.png' %}"><p>Xchange</p><span class="popuptext" id="myPopup">A Simple Popup!</span></div>
+            <div class="popup" onclick="myFunction()"><img style="width: 40%;" src="{% static 'img/warrent.png' %}"><p>Warranty</p><span class="popuptext" id="myPopup">A Simple Popup!</span></div>
+
+       
+           
+
+        </div>
+        <hr>
+        <h4>About this item</h4>
+        <p>{{object.description|linebreaks}}</p>
+                
+
+    </div>
+
+
+    <div class="col-lg-4">
+        <div class="social-media" style="margin-left: 20%;">
+        <b>Share</b> &nbsp;&nbsp;
+        <a  href="#" role="button"><i class="fa fa-facebook-f"></i></a>&nbsp;
+        <a  href="#" role="button"><i class="fa fa-instagram"></i></a>&nbsp;
+        <a  href="#" role="button"><i class="fa fa-linkedin"></i></a>
+        </div>
+        
+        <div class="box-element" style="margin-top: 3%;">
+            <div class="form" style="margin-left: 10px;">
+                        
+                <form action= "" method = "POST" >
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value = "Add" >
+        
+                </form>
+                <button data-object={{object.pk}} data-action="add" class="btn btn-warning add-btn update-cart" style="border-radius: 40px;border: 2px">Add to Cart</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- <div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="slide-1-description">
+            <img class="thumbnail" src="{{object.imageURL}}" alt="My image">
+        </div>
+        
+        
+        
+
+    </div>
+    <div class="col-lg-6 col-md-6">
+
+        <h1>{{object.title}}</h1>
+        <hr>
+        
+                <p>{{object.description|linebreaks}}</p>
+                <h3>$ {{object.price}}</h3>
+                <div class="addcart" style="float: left;">
+                    <button data-object={{object.pk}} data-action="add" class="btn btn-warning add-btn update-cart">Add to Cart</button>
+
+                </div>
+                
+                <div class="form" style="margin-left: 5px;">
+                        
+                    <form action= "" method = "POST" >
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value = "Add" width="10px" min="0" >
+            
+                    </form>
+                </div>
+                
+
+
+        <br>
+        <b>Share</b> &nbsp;&nbsp;
+        <a  href="#" role="button"><i class="fa fa-facebook-f"></i></a>&nbsp;
+        <a  href="#" role="button"><i class="fa fa-instagram"></i></a>&nbsp;
+        <a  href="#" role="button"><i class="fa fa-linkedin"></i></a>
+      <div class="shareRating">
+            <div class="review">
+                __Add review rating__
+            </div> 
+            <div class="mediaShare">
+               
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+{% endblock content %}
+
