@@ -1,0 +1,35 @@
+{% extends 'home/home.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container">
+
+<img src="{% static 'img/catagry.jpg' %}">
+
+<div class="row">
+
+    {% for catagory in catagories %}
+    <div class="col-lg-4">
+        
+        <div class="box-element product">
+            
+           
+            <a href="{% url 'subcatagory' pk=catagory.pk %}"><img class="thumbnail" src="{{catagory.imageURL}}"></a>
+            
+            <hr>
+            <h6 style="text-align: center;"><strong>{{catagory.name}}</strong></h6>
+
+      
+
+
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+</div>
+
+{% endblock content %}
