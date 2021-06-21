@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h2 style="margin-top:3%">Select a payment method</h2>
+    
+        <div class="box-element" id="payment-info" style="width: fit-content;">
+            <!-- <small>Paypal Options</small> -->
+            <div id="paypal-button-container">
+
+
+            </div>
+
+
+
+
+</div>    
+<script src="https://www.paypal.com/sdk/js?client-id=AVuThnk4XPZslMLZ1hKj7NJ76-mJFF-zvkj74Ju1j8GuecqJxu-FiD8G1gNiRzuJ4XYqZEYTWloItvzV&currency=USD"></script>
+
+<script>
+    var total = '{{cart.get_final_total}}'
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        style: {
+            color:  'blue',
+            shape:  'rect',
+        },
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value:parseFloat(total).toFixed(2)
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                submitFormData()
+            });
+        }
+
+    }).render('#paypal-button-container');
+</script>
+
+
+{% endblock %}
