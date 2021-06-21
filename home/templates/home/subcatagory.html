@@ -1,0 +1,26 @@
+{% extends 'home/home.html' %}
+{% block content %}
+
+<div class="container">
+    <h3 style="text-align: center; margin-top:2%">New & upcoming launches</h3>
+<div class="row">
+    {% for subcatagory in subcatagories %}
+    <div class="col-lg-4">
+        
+        <div class="box-element product">
+            
+            <a href="{% url 'products' pk1=subcatagory.pk pk=subcatagory.pk %}"><img class="thumbnail" src="{{subcatagory.imageURL}}"></a>
+            <hr>
+            <h6 style="text-align: center;"><strong>{{subcatagory.name}}</strong></h6>
+            <!-- <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button> -->
+           
+            
+
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+{% endblock content %}
